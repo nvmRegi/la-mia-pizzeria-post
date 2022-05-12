@@ -12,5 +12,31 @@ namespace La_Mia_pizzeria_static.Controllers
             List<Pizza> pizze = MenùData.GetPizze();
             return View(pizze);
         }
+
+        [HttpGet]
+        public IActionResult Dettagli(string nome)
+        {
+            Pizza pizzaFound = null;
+
+            foreach(Pizza pizza in MenùData.GetPizze())
+            {
+                if(pizza.Nome == nome)
+                {
+                    pizzaFound = pizza;
+                    break;
+                }
+            }
+
+            if(pizzaFound != null)
+            {
+                return View("Dettagli", pizzaFound);
+            }
+            else
+            {
+                return NotFound("La pizza " + nome + "non è stato trovata");
+            }
+        }
     }
+
+
 }
