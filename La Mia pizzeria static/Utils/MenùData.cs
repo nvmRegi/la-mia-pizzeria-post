@@ -8,6 +8,10 @@ namespace La_Mia_pizzeria_static.Utils
 
         public static List<Pizza> GetPizze()
         {
+            if(MenùData.pizze != null)
+            {
+                return MenùData.pizze;
+            }
             List<Pizza> nuovaListaPizza = new List<Pizza>();
             //Pizze default
             Pizza pizza = new Pizza("Marinara", "Pomodoro - origano - aglio - olio", "./img/pizza-marinara.jpg", 4);

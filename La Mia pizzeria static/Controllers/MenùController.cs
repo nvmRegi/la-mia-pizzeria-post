@@ -36,6 +36,28 @@ namespace La_Mia_pizzeria_static.Controllers
                 return NotFound("La pizza " + nome + "non è stato trovata");
             }
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View("FormPizza");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Pizza nuovaPizza)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("FormPost", nuovaPizza);
+            }
+
+            Pizza nuovaPizzaConNome = new Pizza(nuovaPizza.Nome, nuovaPizza.Ingrediente, nuovaPizza.Image, nuovaPizza.Prezzo);
+            
+            MenùData.GetPizze().Add(nuovaPizzaConNome);
+
+            return RedirectToAction("Index");
+        }
     }
 
 
